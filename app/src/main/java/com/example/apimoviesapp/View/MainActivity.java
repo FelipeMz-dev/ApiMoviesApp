@@ -11,6 +11,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
     private MovieViewModel movieViewModel;
+    private TextView txtMainMessage;
     private List<Movie> movieList = new ArrayList<>();
 
     @Override
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 searchMovies(query);
                 searchView.onActionViewCollapsed();
+                txtMainMessage.setVisibility(View.GONE);
                 return true;
             }
 
@@ -65,19 +68,24 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void initComponents(){
+    private void initComponents() {
         recyclerView = findViewById(R.id.recyclerView);
+        txtMainMessage = findViewById(R.id.txtMainMessage);
     }
 
-    private void initUI(){
+    private void initUI() {
         movieAdapter = new MovieAdapter(this, movieList, this::showDialog);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(movieAdapter);
         movieViewModel = new ViewModelProvider(this).get(MovieViewModel.class);
     }
 
-    private void searchMovies(String query){
-        movieViewModel.getMovies(getApplicationContext(),query).observe(this, movies -> {
+    private void searchMovies(String query) {
+        movieViewModel.getMovies(getApplicationContext(), query).observe(this, movies -> {
+            if (movies.size() == 0) {
+                txtMainMessage.setVisibility(View.VISIBLE);
+                txtMainMessage.setText(R.string.not_found);
+            }
             movieList = movies;
             movieAdapter.setData(movies);
         });
@@ -85,9 +93,10 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * this method open a view where show the movie information
+     *
      * @param item is the movie object data
-     * **/
-    private void showDialog(Movie item){
+     **/
+    private void showDialog(Movie item) {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.item_movie_dialog);
         String title = item.getTitle();

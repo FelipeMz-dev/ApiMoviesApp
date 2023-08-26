@@ -3,12 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.MainActivity"
-    android:background="@color/Indigo">
+    android:background="@color/ColdPurple"
+    tools:context=".View.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        tools:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/txtMainMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/look_for_the_movies"
+        android:textSize="22sp" />
+
 
 </FrameLayout>

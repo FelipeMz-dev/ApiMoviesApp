@@ -4,30 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardUseCompatPadding="true"
-    app:cardBackgroundColor="@color/Sapphire"
-    app:cardCornerRadius="6dp">
+    app:cardCornerRadius="6dp"
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal">
+        android:background="@drawable/background_card"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/ivMoviePoster"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginEnd="16dp"
-            tools:src="@drawable/ic_launcher_foreground"/>
+            tools:src="@drawable/ic_launcher_foreground" />
 
         <TextView
             android:id="@+id/tvMovieTittle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="24sp"
-            tools:text="nombre de la pelicula"/>
+            android:textSize="26sp"
+            android:textStyle="bold"
+            tools:text="nombre de la pelicula" />
 
     </LinearLayout>
 
